@@ -16,16 +16,16 @@ echo "Enter Project name (e.g. ounch_webserver):"
 read project_name
 echo "Enter Web server port (e.g. 8000):"
 read web_port
-echo "Enter MySQL server port (e.g. 9906):"
-read mysql_port
-echo "Enter MySQL Root Password:"
-read mysql_root_password
 echo "Enter MySQL Database:"
 read mysql_database
+echo "Enter MySQL Root Password:"
+read mysql_root_password
 echo "Enter MySQL User:"
 read mysql_user
 echo "Enter MySQL User Password:"
 read mysql_user_password
+echo "Enter MySQL server port (e.g. 9906):"
+read mysql_port
 echo "Enter phpmyadmin port (e.g. 8080):"
 read phpmyadmin_port
 
@@ -40,6 +40,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./src:/var/www/html/
+      - ./apache2:/etc/apache2/  
     ports:
       - $web_port:80
   db:
