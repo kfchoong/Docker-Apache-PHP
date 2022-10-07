@@ -12,6 +12,8 @@ if [ ! -d "data" ]; then
 	mkdir data
 fi
 
+echo "Enter Project name (e.g. ounch_webserver):"
+read project_name
 echo "Enter Web server port (e.g. 8000):"
 read web_port
 echo "Enter MySQL server port (e.g. 9906):"
@@ -32,7 +34,7 @@ cat <<EOF > ./docker-compose.yml
 version: '3.8'
 services:
   php-apache-environment:
-    container_name: php-apache
+    container_name: $project_name-php-apache
     build:
       context: ./
       dockerfile: Dockerfile
@@ -41,7 +43,7 @@ services:
     ports:
       - $web_port:80
   db:
-    container_name: db
+    container_name: $project_name-db
     image: mysql
     restart: always
     environment:
@@ -54,6 +56,7 @@ services:
     volumes:
       - ./data:/var/lib/mysql
   phpmyadmin:
+  	container_name: $project_name-phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
       - '$phpmyadmin_port:80'
