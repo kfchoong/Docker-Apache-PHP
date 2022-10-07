@@ -56,7 +56,7 @@ services:
     volumes:
       - ./data:/var/lib/mysql
   phpmyadmin:
-  	container_name: $project_name-phpmyadmin
+    container_name: $project_name-phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
       - '$phpmyadmin_port:80'
