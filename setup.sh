@@ -43,8 +43,8 @@ services:
       - ./apache2:/etc/apache2/  
     ports:
       - $web_port:80
-  db:
-    container_name: $project_name-db
+  mysql:
+    container_name: $project_name-mysql
     image: mysql
     restart: always
     environment:
@@ -63,7 +63,7 @@ services:
       - '$phpmyadmin_port:80'
     restart: always
     environment:
-      PMA_HOST: db
+      PMA_HOST: mysql
     depends_on:
-      - db
+      - mysql
 EOF
